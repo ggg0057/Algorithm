@@ -1,0 +1,28 @@
+#include <stdio.h>
+#include "adjacencyList.h"
+
+void setupGraph(AGraph *graph) {
+	char *names[] = {"A", "B", "C", "D", "E"};
+	initAGraph(graph, names, sizeof(names)/sizeof(names[0]), 1);
+	addAGraph(graph, 0, 4, 1);
+	addAGraph(graph, 0, 3, 1);
+	addAGraph(graph, 0, 1, 1);
+	addAGraph(graph, 1, 4, 1);
+	addAGraph(graph, 1, 2, 1);
+	addAGraph(graph, 2, 0, 1);
+	addAGraph(graph, 3, 2, 1);
+}
+
+int main() {
+	int n = 5;
+	AGraph *graph = createAGraph(n);
+	setupGraph(graph);
+	printf("edge num: %d\n", graph->edgeNum);
+	printf("DFS: ");
+	DFSAGraphTravel(graph, 0);
+	resetAGraphVisited(graph);
+	printf("\nBFS: ");
+	BFSAGraphTravel(graph, 0);
+	releaseAGraph(graph);
+	return 0;
+}
